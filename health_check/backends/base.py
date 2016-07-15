@@ -42,7 +42,7 @@ class BaseHealthCheckBackend(object):
             except (ServiceUnavailable, ServiceReturnedUnexpectedResult) as e:
                 setattr(self, "_status", e.code)
 
-        return self._status
+        return 1 if self._status else 0
 
     def pretty_status(self):
         return "%s" % (HEALTH_CHECK_STATUS_TYPE_TRANSLATOR[self.status])
